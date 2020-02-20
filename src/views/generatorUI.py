@@ -16,6 +16,12 @@ class Ui_MainWindow(object):
         MainWindow.resize(640, 480)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+        self.btnNext = QtWidgets.QPushButton(self.centralwidget)
+        self.btnNext.setGeometry(QtCore.QRect(10, 10, 75, 23))
+        self.btnNext.setObjectName("btnNext")
+        self.lbImage = QtWidgets.QLabel(self.centralwidget)
+        self.lbImage.setGeometry(QtCore.QRect(10, 50, 611, 381))
+        self.lbImage.setObjectName("lbImage")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 640, 21))
@@ -41,6 +47,8 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "UG Tweet Generator"))
+        self.btnNext.setText(_translate("MainWindow", "Next"))
+        self.lbImage.setText(_translate("MainWindow", "TextLabel"))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
         self.actionConfiguration.setText(_translate("MainWindow", "Configuration"))
         self.actionQuit.setText(_translate("MainWindow", "Quit"))
