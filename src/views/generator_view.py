@@ -8,6 +8,7 @@ class GeneratorView(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self, gui, viewmodel, parent=None):
         super().__init__(parent)
 
+        print("hola")
         self.viewmodel = viewmodel
         self.setupUi(self)
 
