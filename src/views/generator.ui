@@ -6,47 +6,133 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>640</width>
-    <height>480</height>
+    <width>1300</width>
+    <height>800</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>UG Tweet Generator</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="btnNext">
+   <widget class="QPushButton" name="btnNext_Background">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>75</width>
+      <width>111</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>Next</string>
+     <string>Next background</string>
     </property>
    </widget>
-   <widget class="QLabel" name="lbImage">
+   <widget class="QLabel" name="lbl_background">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>50</y>
-      <width>611</width>
-      <height>381</height>
+      <y>40</y>
+      <width>1280</width>
+      <height>720</height>
      </rect>
     </property>
     <property name="text">
      <string>TextLabel</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="btnNext_Logo">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>10</y>
+      <width>101</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Next logo local</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnNext_League">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>10</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Next league</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl_logo_1">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>320</y>
+      <width>181</width>
+      <height>161</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl_logo_2">
+    <property name="geometry">
+     <rect>
+      <x>890</x>
+      <y>330</y>
+      <width>181</width>
+      <height>161</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnNext_Logo_2">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>10</y>
+      <width>111</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Next logo visitante</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl_league">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>90</y>
+      <width>151</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <zorder>lbl_background</zorder>
+   <zorder>btnNext_Background</zorder>
+   <zorder>btnNext_Logo</zorder>
+   <zorder>btnNext_League</zorder>
+   <zorder>lbl_logo_1</zorder>
+   <zorder>lbl_logo_2</zorder>
+   <zorder>btnNext_Logo_2</zorder>
+   <zorder>lbl_league</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>640</width>
+     <width>1300</width>
      <height>21</height>
     </rect>
    </property>
