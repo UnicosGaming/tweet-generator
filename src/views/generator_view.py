@@ -27,6 +27,8 @@ class GeneratorView(QtWidgets.QMainWindow, Ui_MainWindow):
         self.btnNext_Logo_2.clicked.connect(self.viewmodel.next_logo_2)
             #Leagues
         self.btnNext_League.clicked.connect(self.viewmodel.next_league)
+           
+
 
 
 
@@ -38,7 +40,37 @@ class GeneratorView(QtWidgets.QMainWindow, Ui_MainWindow):
         self.viewmodel.onNextLogo_2.connect(self.show_logo_2)
             #Leagues
         self.viewmodel.onNextLeague.connect(self.show_leagues)
+            #TextBox
+        self.txt_local.textChanged.connect(self.change_lbl_local)
+        self.txt_visitante.textChanged.connect(self.change_lbl_visitante)
+        self.txt_descripcion.textChanged.connect(self.change_lbl_descripcion)
+
+
+######################################################################################################
+
+#############################         CHANGE LABELS            #######################################
+
+######################################################################################################
+
+
+    def change_lbl_local(self):
+        self.lbl_local.setText(self.txt_local.text())
+
+    def change_lbl_visitante(self):
+        self.lbl_visitante.setText(self.txt_visitante.text())
+
+    def change_lbl_descripcion(self):
+        self.lbl_descripcion.setText(self.txt_descripcion.text())
+
         
+
+
+
+
+
+
+
+
 
 
 ######################################################################################################

@@ -1,6 +1,7 @@
 import os
 
 from PyQt5 import QtCore
+from PyQt5 import QtWidgets
 from PyQt5.QtCore import pyqtSignal
 
 class GeneratorViewModel(QtCore.QObject):

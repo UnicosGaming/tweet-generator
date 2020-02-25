@@ -17,8 +17,8 @@
    <widget class="QPushButton" name="btnNext_Background">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>10</y>
+      <x>120</x>
+      <y>650</y>
       <width>111</width>
       <height>23</height>
      </rect>
@@ -30,49 +30,23 @@
    <widget class="QLabel" name="lbl_background">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>40</y>
-      <width>1280</width>
-      <height>720</height>
+      <x>120</x>
+      <y>50</y>
+      <width>1024</width>
+      <height>512</height>
      </rect>
     </property>
     <property name="text">
      <string>TextLabel</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="btnNext_Logo">
-    <property name="geometry">
-     <rect>
-      <x>150</x>
-      <y>10</y>
-      <width>101</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Next logo local</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btnNext_League">
-    <property name="geometry">
-     <rect>
-      <x>400</x>
-      <y>10</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Next league</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="lbl_logo_1">
     <property name="geometry">
      <rect>
-      <x>310</x>
-      <y>320</y>
-      <width>181</width>
-      <height>161</height>
+      <x>230</x>
+      <y>250</y>
+      <width>200</width>
+      <height>200</height>
      </rect>
     </property>
     <property name="text">
@@ -82,34 +56,21 @@
    <widget class="QLabel" name="lbl_logo_2">
     <property name="geometry">
      <rect>
-      <x>890</x>
-      <y>330</y>
-      <width>181</width>
-      <height>161</height>
+      <x>870</x>
+      <y>250</y>
+      <width>200</width>
+      <height>200</height>
      </rect>
     </property>
     <property name="text">
      <string>TextLabel</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="btnNext_Logo_2">
-    <property name="geometry">
-     <rect>
-      <x>260</x>
-      <y>10</y>
-      <width>111</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Next logo visitante</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="lbl_league">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>90</y>
+      <x>130</x>
+      <y>60</y>
       <width>151</width>
       <height>101</height>
      </rect>
@@ -118,14 +79,209 @@
      <string>TextLabel</string>
     </property>
    </widget>
+   <widget class="QLabel" name="lbl_vs">
+    <property name="geometry">
+     <rect>
+      <x>590</x>
+      <y>300</y>
+      <width>71</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>40</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>VS</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl_local">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>300</y>
+      <width>100</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>40</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>VS</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl_visitante">
+    <property name="geometry">
+     <rect>
+      <x>730</x>
+      <y>300</y>
+      <width>100</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>40</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>VS</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl_descripcion">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>470</y>
+      <width>601</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>40</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>VS</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="txt_local">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>710</y>
+      <width>113</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="maxLength">
+     <number>2</number>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="txt_visitante">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>710</y>
+      <width>113</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="maxLength">
+     <number>2</number>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="txt_descripcion">
+    <property name="geometry">
+     <rect>
+      <x>840</x>
+      <y>710</y>
+      <width>113</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="maxLength">
+     <number>250</number>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnNext_League">
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>650</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Next league</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnNext_Logo">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>650</y>
+      <width>101</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Next logo local</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnNext_Logo_2">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>650</y>
+      <width>111</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Next logo visitante</string>
+    </property>
+   </widget>
    <zorder>lbl_background</zorder>
    <zorder>btnNext_Background</zorder>
-   <zorder>btnNext_Logo</zorder>
-   <zorder>btnNext_League</zorder>
    <zorder>lbl_logo_1</zorder>
    <zorder>lbl_logo_2</zorder>
-   <zorder>btnNext_Logo_2</zorder>
    <zorder>lbl_league</zorder>
+   <zorder>lbl_vs</zorder>
+   <zorder>lbl_local</zorder>
+   <zorder>lbl_visitante</zorder>
+   <zorder>lbl_descripcion</zorder>
+   <zorder>txt_local</zorder>
+   <zorder>txt_visitante</zorder>
+   <zorder>txt_descripcion</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
