@@ -1,5 +1,5 @@
 import os
-from PyQt5 import QtWidgets, QtGui
+from PyQt5 import QtWidgets, QtGui, QtCore
 from PyQt5.QtWidgets import QFileDialog
 
 from src.views.configuration.configurationUI import Ui_Dialog
@@ -10,9 +10,20 @@ class ConfigurationView(QtWidgets.QMainWindow, Ui_Dialog):
         
         self.viewmodel = viewmodel
         self.setupUi(self)
+        self.set_icon()
         self.configure_signals()
 
         self.load_teams()
+        self.load_configuration()
+
+    '''
+    Configure the icon on title bar
+    '''
+    def set_icon(self):
+        icon_path = os.path.join(os.getcwd(), "resources", "application", "256x256.png")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(icon_path), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.setWindowIcon(icon)
 
     def configure_signals(self):
         self.btnFolderDialog.clicked.connect(self.open_folder_dialog)
@@ -84,7 +95,16 @@ class ConfigurationView(QtWidgets.QMainWindow, Ui_Dialog):
     '''
     def load_teams(self):
         teams = self.viewmodel.get_teams()
-        print(teams)
         self.lstTeams.addItems(teams)
+
+    def load_configuration(self):
+        if self.viewmodel.get_value("configured"):
+            # Select the row with the specific team
+            items = self.lstTeams.findItems(self.viewmodel.get_value("team"),QtCore.Qt.MatchExactly)
+            if len(items) > 0:
+                item_model = self.lstTeams.indexFromItem(items[0])
+                self.lstTeams.setCurrentRow(item_model.row())
+
+            self.txtImagesFolderPath.setText(self.viewmodel.get_value("images"))
 
     

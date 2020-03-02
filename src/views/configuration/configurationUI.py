@@ -15,6 +15,13 @@ class Ui_Dialog(object):
         Dialog.setObjectName("Dialog")
         Dialog.setWindowModality(QtCore.Qt.ApplicationModal)
         Dialog.resize(363, 189)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(Dialog.sizePolicy().hasHeightForWidth())
+        Dialog.setSizePolicy(sizePolicy)
+        Dialog.setMinimumSize(QtCore.QSize(363, 189))
+        Dialog.setMaximumSize(QtCore.QSize(363, 189))
         self.lstTeams = QtWidgets.QListWidget(Dialog)
         self.lstTeams.setGeometry(QtCore.QRect(10, 40, 341, 111))
         font = QtGui.QFont()
@@ -39,7 +46,6 @@ class Ui_Dialog(object):
         font.setWeight(50)
         self.label.setFont(font)
         self.label.setObjectName("label")
-        
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
