@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '.\src\views\generator\generator.ui'
+# Form implementation generated from reading ui file '.\src\views\generator.ui'
 #
 # Created by: PyQt5 UI code generator 5.14.1
 #
@@ -67,14 +67,13 @@ class Ui_MainWindow(object):
         self.lbl_visitor.setAlignment(QtCore.Qt.AlignCenter)
         self.lbl_visitor.setObjectName("lbl_visitor")
         self.lbl_description = QtWidgets.QLabel(self.centralwidget)
-        self.lbl_description.setGeometry(QtCore.QRect(60, 430, 961, 100))
+        self.lbl_description.setGeometry(QtCore.QRect(60, 430, 941, 100))
         font = QtGui.QFont()
         font.setPointSize(40)
         font.setBold(True)
         font.setWeight(75)
         self.lbl_description.setFont(font)
         self.lbl_description.setStyleSheet("color: rgb(255, 255, 255);")
-        self.lbl_description.setText("")
         self.lbl_description.setAlignment(QtCore.Qt.AlignCenter)
         self.lbl_description.setObjectName("lbl_description")
         self.txt_local = QtWidgets.QLineEdit(self.centralwidget)
@@ -197,6 +196,7 @@ class Ui_MainWindow(object):
         self.lbl_vs.setText(_translate("MainWindow", "VS"))
         self.lbl_local.setText(_translate("MainWindow", "0"))
         self.lbl_visitor.setText(_translate("MainWindow", "0"))
+        self.lbl_description.setText(_translate("MainWindow", "X"))
         self.btnNext_League.setText(_translate("MainWindow", "Cambiar logo liga"))
         self.btnNext_Logo_local.setText(_translate("MainWindow", "Cambiar equipo local"))
         self.btnNext_Logo_visitor.setText(_translate("MainWindow", "Cambiar equipo visitante"))

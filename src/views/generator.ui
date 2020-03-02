@@ -169,7 +169,7 @@
      <rect>
       <x>60</x>
       <y>430</y>
-      <width>961</width>
+      <width>941</width>
       <height>100</height>
      </rect>
     </property>
@@ -184,7 +184,7 @@
      <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string/>
+     <string>X</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>

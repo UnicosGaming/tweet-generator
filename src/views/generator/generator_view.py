@@ -1,4 +1,5 @@
-from PyQt5 import QtWidgets, QtGui
+import os
+from PyQt5 import QtWidgets, QtGui 
 
 from src.views.generator.generatorUI import Ui_MainWindow
 from src.viewmodels.configuration_viewmodel import ConfigurationViewModel
@@ -13,8 +14,15 @@ class GeneratorView(QtWidgets.QMainWindow, Ui_MainWindow):
        
         self.viewmodel = viewmodel
         self.setupUi(self)
+        self.set_icon()
 
         self.configure_signals()
+
+    def set_icon(self):
+        icon_path = os.path.join(os.getcwd(), "resources", "application", "256x256.png")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(icon_path), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.setWindowIcon(icon)
 
     def configure_signals(self):
         # GUI signals
