@@ -23,8 +23,8 @@ class GeneratorView(QtWidgets.QMainWindow, Ui_MainWindow):
             #Backgrounds 
         self.btnNext_Background.clicked.connect(self.viewmodel.next_background)
             #Logos
-        self.btnNext_Logo.clicked.connect(self.viewmodel.next_logo_1)
-        self.btnNext_Logo_2.clicked.connect(self.viewmodel.next_logo_2)
+        self.btnNext_Logo_local.clicked.connect(self.viewmodel.next_logo_local)
+        self.btnNext_Logo_visitor.clicked.connect(self.viewmodel.next_logo_visitor)
             #Leagues
         self.btnNext_League.clicked.connect(self.viewmodel.next_league)
            
@@ -36,14 +36,14 @@ class GeneratorView(QtWidgets.QMainWindow, Ui_MainWindow):
             #Backgrounds             
         self.viewmodel.onNextBackground.connect(self.show_background)
             #Logos
-        self.viewmodel.onNextLogo_1.connect(self.show_logo_1)
-        self.viewmodel.onNextLogo_2.connect(self.show_logo_2)
+        self.viewmodel.onNextLogo_local.connect(self.show_logo_local)
+        self.viewmodel.onNextLogo_visitor.connect(self.show_logo_visitor)
             #Leagues
         self.viewmodel.onNextLeague.connect(self.show_leagues)
             #TextBox
         self.txt_local.textChanged.connect(self.change_lbl_local)
-        self.txt_visitante.textChanged.connect(self.change_lbl_visitante)
-        self.txt_descripcion.textChanged.connect(self.change_lbl_descripcion)
+        self.txt_visitor.textChanged.connect(self.change_lbl_visitor)
+        self.txt_description.textChanged.connect(self.change_lbl_description)
 
 
 ######################################################################################################
@@ -56,11 +56,11 @@ class GeneratorView(QtWidgets.QMainWindow, Ui_MainWindow):
     def change_lbl_local(self):
         self.lbl_local.setText(self.txt_local.text())
 
-    def change_lbl_visitante(self):
-        self.lbl_visitante.setText(self.txt_visitante.text())
+    def change_lbl_visitor(self):
+        self.lbl_visitor.setText(self.txt_visitor.text())
 
-    def change_lbl_descripcion(self):
-        self.lbl_descripcion.setText(self.txt_descripcion.text())
+    def change_lbl_description(self):
+        self.lbl_description.setText(self.txt_description.text())
 
         
 
@@ -88,19 +88,19 @@ class GeneratorView(QtWidgets.QMainWindow, Ui_MainWindow):
 
 
 
-    def show_logo_1(self, image_path):
+    def show_logo_local(self, image_path):
         image = QtGui.QImage(image_path)
         pixmap = QtGui.QPixmap.fromImage(image)
 
-        self.lbl_logo_1.setPixmap(pixmap.scaled(self.lbl_logo_1.size()))
+        self.lbl_logo_local.setPixmap(pixmap.scaled(self.lbl_logo_local.size()))
 
 
 
-    def show_logo_2(self, image_path):
+    def show_logo_visitor(self, image_path):
         image = QtGui.QImage(image_path)
         pixmap = QtGui.QPixmap.fromImage(image)
 
-        self.lbl_logo_2.setPixmap(pixmap.scaled(self.lbl_logo_2.size()))
+        self.lbl_logo_visitor.setPixmap(pixmap.scaled(self.lbl_logo_visitor.size()))
 
 
 
