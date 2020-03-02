@@ -28,24 +28,11 @@ class GeneratorViewModel(QtCore.QObject):
         self.Logo_visitor_images = self.load_logo_visitor()
         self.leagues_images = self.load_leagues()
     
-
-
-
-######################################################################################################
-
-#############################          DEF LOADS               #######################################
-
-######################################################################################################
-
-
-
-
     def load_backgrounds(self):
         paths = []
         for d, _, f in os.walk(self.backgrounds_path):
             for file in f:
                 paths.append(os.path.join(d,file))
-
         return paths
 
     def load_logo_local(self):
@@ -53,7 +40,6 @@ class GeneratorViewModel(QtCore.QObject):
         for d, _, f in os.walk(self.Logo_local_path):
             for file in f:
                 paths.append(os.path.join(d,file))
-
         return paths
 
     def load_logo_visitor(self):
@@ -61,7 +47,6 @@ class GeneratorViewModel(QtCore.QObject):
         for d, _, f in os.walk(self.Logo_visitor_path):
             for file in f:
                 paths.append(os.path.join(d,file))
-
         return paths
 
     def load_leagues(self):
@@ -69,53 +54,29 @@ class GeneratorViewModel(QtCore.QObject):
         for d, _, f in os.walk(self.League_path):
             for file in f:
                 paths.append(os.path.join(d,file))
-
         return paths
 
-
-######################################################################################################
-
-#############################          NEXT PICTURES           #######################################
-
-######################################################################################################
-
-
     def next_background(self):
-        self.background_index += 1
-        
+        self.background_index += 1        
         if self.background_index >= len(self.background_images):
             self.background_index = 0
-
         self.onNextBackground.emit(self.background_images[self.background_index])
 
-
     def next_logo_local(self):
-        self.Logo_local_index += 1
-        
+        self.Logo_local_index += 1        
         if self.Logo_local_index >= len(self.Logo_local_images):
             self.Logo_local_index = 0
-
         self.onNextLogo_local.emit(self.Logo_local_images[self.Logo_local_index])
 
 
     def next_logo_visitor(self):
-        self.Logo_visitor_index += 1
-        
+        self.Logo_visitor_index += 1        
         if self.Logo_visitor_index >= len(self.Logo_visitor_images):
             self.Logo_visitor_index = 0
-
         self.onNextLogo_visitor.emit(self.Logo_visitor_images[self.Logo_visitor_index])
 
-
     def next_league(self):
-        self.League_index += 1
-        
+        self.League_index += 1        
         if self.League_index >= len(self.leagues_images):
             self.League_index = 0
-
         self.onNextLeague.emit(self.leagues_images[self.League_index])
-        
-
-
-
-######################################################################################################

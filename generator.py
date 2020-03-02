@@ -2,11 +2,11 @@ import sys
 
 from PyQt5.QtWidgets import QApplication
 
-from src.views.generatorUI import Ui_MainWindow
-from src.views.generator_view import GeneratorView
+from src.views.generator.generatorUI import Ui_MainWindow
+from src.views.generator.generator_view import GeneratorView
+from src.viewmodels.generator_viewmodel import GeneratorViewModel
 from src.views.configuration.configurationUI import Ui_Dialog as Configuration_UI
 from src.views.configuration.configuration_view import ConfigurationView
-from src.viewmodels.generator_viewmodel import GeneratorViewModel
 from src.viewmodels.configuration_viewmodel import ConfigurationViewModel
 
 def main():
