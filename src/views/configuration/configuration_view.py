@@ -1,6 +1,8 @@
 import os
+import sys
+
 from PyQt5 import QtWidgets, QtGui, QtCore
-from PyQt5.QtWidgets import QFileDialog
+from PyQt5.QtWidgets import QFileDialog, QMessageBox
 
 from src.views.configuration.configurationUI import Ui_Dialog
 
@@ -41,6 +43,7 @@ class ConfigurationView(QtWidgets.QMainWindow, Ui_Dialog):
     Re-implement the closeEvent handler from Dialog in order to catch such event
     '''
     def closeEvent(self, event):
+        is_configuration_changed = False
         team = self.get_selected_team()
         images_path = self.get_images_path()
 
@@ -61,11 +64,34 @@ class ConfigurationView(QtWidgets.QMainWindow, Ui_Dialog):
             event.ignore()
             return
 
+        # If the team has changed, we need to ask for restart the application
+        # in order to change the controls tab
+        if team != self.viewmodel.get_team():
+            is_configuration_changed = True
+
         if team and images_path:
-            self.viewmodel.set_value("team", team)
-            self.viewmodel.set_value("images", images_path)
-            self.viewmodel.set_value("configured", True)
+            self.viewmodel.set_team(team)
+            self.viewmodel.set_images_path(images_path)
             self.viewmodel.save()
+
+        # Restart the application
+        if is_configuration_changed and self.ask_for_restart():
+            # TODO: Move this code to a system class o something
+            python = sys.executable
+            os.execl(python, python, * sys.argv)
+            
+    '''
+    Show a dialog asking for restart the application
+    '''
+    def ask_for_restart(self):
+        dlg = QMessageBox()
+        dlg.setWindowTitle("Reiniciar aplicación")
+        dlg.setText("Los cambios se aplicarán después de reiniciar la aplicación. ¿Desea reiniciar ahora?")
+        dlg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+        if dlg.exec() == QMessageBox.Ok:
+            return True
+        
+        return False
 
     '''
     Returns the selected team from the listView
@@ -98,13 +124,13 @@ class ConfigurationView(QtWidgets.QMainWindow, Ui_Dialog):
         self.lstTeams.addItems(teams)
 
     def load_configuration(self):
-        if self.viewmodel.get_value("configured"):
+        if self.viewmodel.is_configured():
             # Select the row with the specific team
-            items = self.lstTeams.findItems(self.viewmodel.get_value("team"),QtCore.Qt.MatchExactly)
+            items = self.lstTeams.findItems(self.viewmodel.get_team(),QtCore.Qt.MatchExactly)
             if len(items) > 0:
                 item_model = self.lstTeams.indexFromItem(items[0])
                 self.lstTeams.setCurrentRow(item_model.row())
 
-            self.txtImagesFolderPath.setText(self.viewmodel.get_value("images"))
+            self.txtImagesFolderPath.setText(self.viewmodel.get_images_path())
 
     

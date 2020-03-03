@@ -10,8 +10,10 @@ class GeneratorViewModel(QtCore.QObject):
     onNextLogo_visitor = pyqtSignal(str)
     onNextLeague = pyqtSignal(str)
 
-    def __init__(self):
+    def __init__(self, config_service):
         super().__init__()
+
+        self.__config_service = config_service
         
         self.backgrounds_path = os.path.join(os.getcwd(), "resources", "backgrounds")
         self.Logo_local_path = os.path.join(os.getcwd(), "resources", "logos")
@@ -62,17 +64,25 @@ class GeneratorViewModel(QtCore.QObject):
             self.background_index = 0
         self.onNextBackground.emit(self.background_images[self.background_index])
 
-    def next_logo_local(self):
-        self.Logo_local_index += 1        
+    def change_logo_local(self, direction):
+        self.Logo_local_index += direction.value
+
         if self.Logo_local_index >= len(self.Logo_local_images):
             self.Logo_local_index = 0
+        if self.Logo_local_index < 0:
+            self.Logo_local_index = len(self.Logo_local_images) - 1
+    
         self.onNextLogo_local.emit(self.Logo_local_images[self.Logo_local_index])
 
 
-    def next_logo_visitor(self):
-        self.Logo_visitor_index += 1        
+    def change_logo_visitor(self, direction):
+        self.Logo_visitor_index += direction.value
+
         if self.Logo_visitor_index >= len(self.Logo_visitor_images):
             self.Logo_visitor_index = 0
+        if self.Logo_visitor_index < 0:
+            self.Logo_visitor_index = len(self.Logo_visitor_images) - 1
+
         self.onNextLogo_visitor.emit(self.Logo_visitor_images[self.Logo_visitor_index])
 
     def next_league(self):
@@ -80,3 +90,9 @@ class GeneratorViewModel(QtCore.QObject):
         if self.League_index >= len(self.leagues_images):
             self.League_index = 0
         self.onNextLeague.emit(self.leagues_images[self.League_index])
+
+    def get_control_tab(self):
+        team = self.__config_service.get_value("team")
+        controls = self.__config_service.get_value("controls")
+
+        return controls[team]

@@ -2,59 +2,27 @@ import os
 import json
 
 class ConfigurationViewModel():
-    def __init__(self):
-        self.__config_path = os.path.join(os.getcwd(), "configuration.json")
-        self.__teams_path = os.path.join(os.getcwd(), "teams.json")
-        self.__configuration = None
+    def __init__(self, config_service):
+        self.__config_service = config_service
 
-        self.__initialize()
+    def is_configured(self):
+        return self.__config_service.get_value("configured")
+    
+    def get_team(self):
+        return self.__config_service.get_value("team")
 
-    def __initialize(self):
-        if not os.path.exists(self.__config_path):
-            self.__create()
-            
-        self.load_configuration()
+    def get_images_path(self):
+        return self.__config_service.get_value("images")
 
-    '''
-    Create an initial configuration with empty values
-    '''
-    def __create(self):
-        data = '{"team":"", "images":"", "configured":false}'
-        
-        self.__configuration = json.loads(data)
-        
-        self.save()
-
-    '''
-    Load the configuration from json file
-    '''
-    def load_configuration(self):
-        with open(self.__config_path) as f:
-            self.__configuration = json.load(f)
-
-    '''
-    Save the configuration data into the configuration.json file
-    '''
-    def save(self):
-        with open(self.__config_path, 'w', encoding='utf-8') as f:
-            json.dump(self.__configuration, f, ensure_ascii=False, indent=4)
-
-    '''
-    Change the configuration value with the specific key
-    '''
-    def set_value(self, key, value):
-        self.__configuration[key] = value
-
-    '''
-    Returns the value for the specific key
-    '''
-    def get_value(self, key):
-        return self.__configuration[key]
-
-    '''
-    Returns a list of teams from the teams.json file
-    '''
+    def set_team(self, value):
+        self.__config_service.set_value("team", value)
+    
+    def set_images_path(self, value):
+        self.__config_service.set_value("images", value)
+    
     def get_teams(self):
-        with open(self.__teams_path) as f:
-            data = json.load(f)
-            return data["teams"]
+        return self.__config_service.get_teams()
+
+    def save(self):
+        self.__config_service.set_value("configured", True)
+        self.__config_service.save()
