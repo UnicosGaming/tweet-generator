@@ -22,7 +22,7 @@ class ConfigurationView(QtWidgets.QMainWindow, Ui_Dialog):
     Configure the icon on title bar
     '''
     def set_icon(self):
-        icon_path = os.path.join(os.getcwd(), "resources", "application", "256x256.png")
+        icon_path = self.viewmodel.get_application_icon()
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(icon_path), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.setWindowIcon(icon)

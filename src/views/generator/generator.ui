@@ -17,7 +17,7 @@
    <bool>false</bool>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="btnNext_Background">
+   <widget class="QPushButton" name="btnChange_Background">
     <property name="geometry">
      <rect>
       <x>170</x>
@@ -50,7 +50,7 @@
      <string>TextLabel</string>
     </property>
    </widget>
-   <widget class="QLabel" name="lbl_logo_local">
+   <widget class="QLabel" name="lbl_logo_team_a">
     <property name="geometry">
      <rect>
       <x>90</x>
@@ -63,7 +63,7 @@
      <string>TextLabel</string>
     </property>
    </widget>
-   <widget class="QLabel" name="lbl_logo_visitor">
+   <widget class="QLabel" name="lbl_logo_team_b">
     <property name="geometry">
      <rect>
       <x>710</x>
@@ -100,6 +100,7 @@
     </property>
     <property name="font">
      <font>
+      <family>Unica One</family>
       <pointsize>40</pointsize>
       <weight>75</weight>
       <bold>true</bold>
@@ -123,6 +124,7 @@
     </property>
     <property name="font">
      <font>
+      <family>Unica One</family>
       <pointsize>70</pointsize>
       <weight>75</weight>
       <bold>true</bold>
@@ -149,6 +151,7 @@
     </property>
     <property name="font">
      <font>
+      <family>Unica One</family>
       <pointsize>70</pointsize>
       <weight>75</weight>
       <bold>true</bold>
@@ -175,6 +178,7 @@
     </property>
     <property name="font">
      <font>
+      <family>Unica One</family>
       <pointsize>40</pointsize>
       <weight>75</weight>
       <bold>true</bold>
@@ -190,7 +194,7 @@
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QPushButton" name="btnNext_League">
+   <widget class="QPushButton" name="btnChange_Competition">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -207,7 +211,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Cambiar logo liga</string>
+     <string>Cambiar competición</string>
     </property>
    </widget>
    <widget class="QTabWidget" name="tbControls">
@@ -631,11 +635,11 @@
      </widget>
     </widget>
    </widget>
-   <zorder>btnNext_League</zorder>
+   <zorder>btnChange_Competition</zorder>
    <zorder>lbl_background</zorder>
-   <zorder>btnNext_Background</zorder>
-   <zorder>lbl_logo_local</zorder>
-   <zorder>lbl_logo_visitor</zorder>
+   <zorder>btnChange_Background</zorder>
+   <zorder>lbl_logo_team_a</zorder>
+   <zorder>lbl_logo_team_b</zorder>
    <zorder>lbl_league</zorder>
    <zorder>lbl_vs</zorder>
    <zorder>lbl_local</zorder>

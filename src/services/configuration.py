@@ -30,6 +30,12 @@ class ConfigurationService():
         return self.__configuration[key]
 
     '''
+    Return the value from the application section in the configuration file
+    '''
+    def get_application_value(self, key):
+        return self.__configuration["application"][key]
+
+    '''
     Change the configuration value with the specific key
     '''
     def set_value(self, key, value):
