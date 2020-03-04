@@ -3,10 +3,14 @@ import sys
 
 from PyQt5 import QtWidgets, QtGui, QtCore
 from PyQt5.QtWidgets import QFileDialog, QMessageBox
+from PyQt5.QtCore import pyqtSignal
 
 from src.views.configuration.configurationUI import Ui_Dialog
+from src.services.event_channel import EventChannel
 
 class ConfigurationView(QtWidgets.QMainWindow, Ui_Dialog):
+    on_configuration_changed = pyqtSignal()
+
     def __init__(self, gui, viewmodel, parent=None):
         super().__init__(parent)
         
@@ -43,7 +47,9 @@ class ConfigurationView(QtWidgets.QMainWindow, Ui_Dialog):
     Re-implement the closeEvent handler from Dialog in order to catch such event
     '''
     def closeEvent(self, event):
-        is_configuration_changed = False
+        is_team_changed = False
+        is_image_path_changed = False
+
         team = self.get_selected_team()
         images_path = self.get_images_path()
 
@@ -67,19 +73,26 @@ class ConfigurationView(QtWidgets.QMainWindow, Ui_Dialog):
         # If the team has changed, we need to ask for restart the application
         # in order to change the controls tab
         if team != self.viewmodel.get_team():
-            is_configuration_changed = True
+            is_team_changed = True
+        
+        if images_path != self.viewmodel.get_images_path():
+            is_image_path_changed = True
 
         if team and images_path:
             self.viewmodel.set_team(team)
             self.viewmodel.set_images_path(images_path)
             self.viewmodel.save()
+            self.viewmodel.load_configuration()
 
         # Restart the application
-        if is_configuration_changed and self.ask_for_restart():
+        if is_team_changed and self.ask_for_restart():
             # TODO: Move this code to a system class o something
             python = sys.executable
             os.execl(python, python, * sys.argv)
-            
+
+        if is_image_path_changed:
+            EventChannel().instance().publish("image_path_changed")
+
     '''
     Show a dialog asking for restart the application
     '''

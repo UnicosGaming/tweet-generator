@@ -1,10 +1,9 @@
 import os
 
-class BaseViewModel():
-    def __init__(self, config_service):
-        self.config_service = config_service
+from src.services.configuration import ConfigurationService
 
+class BaseViewModel():
     def get_application_icon(self):
-        icon_name =  self.config_service.get_application_value("icon")
+        icon_name =  ConfigurationService().instance().get_application_value("icon")
     
         return os.path.join(os.getcwd(), "resources", "images", icon_name)

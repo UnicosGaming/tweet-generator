@@ -14,21 +14,21 @@ from src.viewmodels.configuration import ConfigurationViewModel
 
 from src.services.configuration import ConfigurationService
 
-def main():
-    app = QApplication(sys.argv)
-    fonts_path = os.path.join(os.getcwd(), "resources", "fonts", "UnicaOne-Regular.ttf")
+'''
+Add the custom font to the resources
+'''
+def initialize_font():
+    font_name = ConfigurationService().instance().get_application_value("font")
+    fonts_path = os.path.join(os.getcwd(), "resources", "fonts", font_name)
     QtGui.QFontDatabase.addApplicationFont(fonts_path)
 
-    # Initialize the configuration
-    configuration_s = ConfigurationService()
-    
-    configuration_vm = ConfigurationViewModel(configuration_s)
-    if not configuration_vm.is_configured():
-        configuration_gui = Configuration_UI()
-        configuration_v = ConfigurationView(configuration_gui, viewmodel=configuration_vm)
-        configuration_v.show()
+def main():
+    app = QApplication(sys.argv)
 
-    viewmodel = GeneratorViewModel(configuration_s)
+    # Configure font
+    initialize_font()
+
+    viewmodel = GeneratorViewModel()
 
     gui = Ui_MainWindow()
     view = GeneratorView(gui, viewmodel = viewmodel)

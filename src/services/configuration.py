@@ -1,18 +1,29 @@
 import os
 import json
 
+from PyQt5 import QtCore
+from PyQt5.QtCore import pyqtSignal
+
 class ConfigurationService():
+    __instance = None
+
     def __init__(self):
         self.__config_path = os.path.join(os.getcwd(), "configuration.json")
         self.__teams_path = os.path.join(os.getcwd(), "teams.json")
         self.__configuration = None
 
-        self.__load_configuration()
+        self.load_configuration()
+
+    def instance(self):
+        if ConfigurationService.__instance is None:
+            ConfigurationService.__instance = ConfigurationService()
+
+        return ConfigurationService.__instance
 
     '''
     Load the configuration from json file
     '''
-    def __load_configuration(self):
+    def load_configuration(self):
         with open(self.__config_path) as f:
             self.__configuration =  json.load(f)
     

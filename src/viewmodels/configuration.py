@@ -1,31 +1,36 @@
 import os
 
+from src.services.configuration import ConfigurationService
 from src.viewmodels.base import BaseViewModel
 
 class ConfigurationViewModel(BaseViewModel):
-    def __init__(self, config_service):
-        super().__init__(config_service)
+    def __init__(self):
+        super().__init__()
 
     def is_configured(self):
-        return self.config_service.get_value("configured")
+        return ConfigurationService().instance().get_value("configured")
     
     def get_team(self):
-        return self.config_service.get_value("team")
+        return ConfigurationService().instance().get_value("team")
 
     def get_images_path(self):
-        return self.config_service.get_value("images")
+        return ConfigurationService().instance().get_value("images")
 
     def set_team(self, value):
-        self.config_service.set_value("team", value)
+        ConfigurationService().instance().set_value("team", value)
     
     def set_images_path(self, value):
-        self.config_service.set_value("images", value)
+        ConfigurationService().instance().set_value("images", value)
     
     def get_teams(self):
-        return self.config_service.get_teams()
+        return ConfigurationService().instance().get_teams()
 
     def save(self):
-        self.config_service.set_value("configured", True)
-        self.config_service.save()
+        ConfigurationService().instance().set_value("configured", True)
+        ConfigurationService().instance().save()
+
+    def load_configuration(self):
+        ConfigurationService().instance().load_configuration()
+    
 
     
