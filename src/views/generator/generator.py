@@ -1,5 +1,7 @@
 import os
+from pathlib import Path
 from functools import partial
+
 from PyQt5 import QtWidgets, QtGui 
 from PyQt5 import QtCore
 
@@ -9,6 +11,7 @@ from src.views.configuration.configuration import ConfigurationView
 from src.viewmodels.configuration import ConfigurationViewModel
 from src.services.configuration import ConfigurationService
 from src.services.event_channel import EventChannel
+from src.services.dialog import DialogService
 from src.enums.Directions import Direction
 
 
@@ -37,6 +40,7 @@ class GeneratorView(QtWidgets.QMainWindow, Ui_MainWindow):
         self.btnChange_Background.clicked.connect(self.viewmodel.change_background)
         self.btnChange_Competition.clicked.connect(self.viewmodel.change_competition)
         self.actionConfiguration.triggered.connect(self.open_configuration_dialog)
+        self.action_UpdateImageLibrary.triggered.connect(lambda: EventChannel().instance().publish("image_path_changed"))
         
         # Tab Local - Visitor
         self.txtResultLocalLV.textChanged.connect(self.change_result_team_a)
@@ -63,7 +67,10 @@ class GeneratorView(QtWidgets.QMainWindow, Ui_MainWindow):
         self.viewmodel.on_competition_changed.connect(self.change_logo_competition)
         
         # Services
-        EventChannel().instance().subscribe("images_loaded", self.initialize_screen)
+        EventChannel().instance().subscribe("backgrounds_loaded", self.viewmodel.change_background)
+        EventChannel().instance().subscribe("logo_teams_loaded", self.__initialize_logo_teams)
+        EventChannel().instance().subscribe("logo_competitions_loaded", self.viewmodel.change_competition)
+
 
 
     def is_configured(self):
@@ -72,9 +79,19 @@ class GeneratorView(QtWidgets.QMainWindow, Ui_MainWindow):
     def initialize_configuration(self):
         self.open_configuration_dialog()
 
+    '''
+    Initialize the window with all available images
+    '''
     def initialize_screen(self):
         self.viewmodel.change_background()
         self.viewmodel.change_competition()
+        self.viewmodel.change_logo_team_a(Direction.FORWARD)
+        self.viewmodel.change_logo_team_b(Direction.FORWARD)
+
+    '''
+    Show the logo images. Usually after reloading the image list
+    '''
+    def __initialize_logo_teams(self):
         self.viewmodel.change_logo_team_a(Direction.FORWARD)
         self.viewmodel.change_logo_team_b(Direction.FORWARD)
 
@@ -117,28 +134,55 @@ class GeneratorView(QtWidgets.QMainWindow, Ui_MainWindow):
         self.lbl_description.setText(value)
 
     def change_background(self, image_path):
-        image = QtGui.QImage(image_path)
-        pixmap = QtGui.QPixmap.fromImage(image)
+        image = self.__try_get_image(image_path)
 
-        self.lbl_background.setPixmap(pixmap.scaled(self.lbl_background.size()))
+        if image is None:
+            EventChannel().instance().publish("background_reload")
+        else:
+            self.lbl_background.setPixmap(image.scaled(self.lbl_background.size()))
 
     def change_logo_team_a(self, image_path):
-        image = QtGui.QImage(image_path)
-        pixmap = QtGui.QPixmap.fromImage(image)
+        image = self.__try_get_image(image_path)
 
-        self.lbl_logo_team_a.setPixmap(pixmap.scaled(self.lbl_logo_team_a.size()))
+        if image is None:
+            EventChannel().instance().publish("logo_teams_reload")
+        else:
+            self.lbl_logo_team_a.setPixmap(image.scaled(self.lbl_logo_team_a.size()))
 
     def change_logo_team_b(self, image_path):
-        image = QtGui.QImage(image_path)
-        pixmap = QtGui.QPixmap.fromImage(image)
+        image = self.__try_get_image(image_path)
 
-        self.lbl_logo_team_b.setPixmap(pixmap.scaled(self.lbl_logo_team_b.size()))
-
+        if image is None:
+            EventChannel().instance().publish("logo_teams_reload")
+        else:
+            self.lbl_logo_team_b.setPixmap(image.scaled(self.lbl_logo_team_b.size()))
+    
     def change_logo_competition(self, image_path):
-        image = QtGui.QImage(image_path)
-        pixmap = QtGui.QPixmap.fromImage(image)
+        image = self.__try_get_image(image_path)
 
-        self.lbl_league.setPixmap(pixmap.scaled(self.lbl_league.size()))
+        if image is None:
+            EventChannel().instance().publish("logo_competitions_reload")
+        else:
+            self.lbl_league.setPixmap(image.scaled(self.lbl_league.size()))
+
+    '''
+    Return the pixmap image if available
+    '''
+    def __try_get_image(self, image_path):
+        # Check if the image still existing
+        if os.path.exists(image_path):
+            image = QtGui.QImage(image_path)
+            pixmap = QtGui.QPixmap.fromImage(image)
+            
+            return pixmap
+        
+        path = Path(image_path)
+        if path.parent.exists:
+            # If the path does not contains images, notify to the user
+            if not any([True for _ in os.scandir(path.parent)]):
+                DialogService().instance().show_ok("Imágen no encontrada", "No se encuentra ninguna imágen. Abre la configuración y selecciona la ruta con las imágenes de la aplicación.")
+
+        return None
 
     def open_configuration_dialog(self):
         configuration_vm = ConfigurationViewModel()

@@ -10,6 +10,18 @@
     <height>713</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>1053</width>
+    <height>713</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1053</width>
+    <height>713</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>UG Tweet Generator</string>
   </property>
@@ -664,7 +676,14 @@
     <addaction name="separator"/>
     <addaction name="actionQuit"/>
    </widget>
+   <widget class="QMenu" name="menuHerramientas">
+    <property name="title">
+     <string>Herramientas</string>
+    </property>
+    <addaction name="action_UpdateImageLibrary"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuHerramientas"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionConfiguration">
@@ -675,6 +694,11 @@
   <action name="actionQuit">
    <property name="text">
     <string>Quit</string>
+   </property>
+  </action>
+  <action name="action_UpdateImageLibrary">
+   <property name="text">
+    <string>Actualizar biblioteca de imágenes</string>
    </property>
   </action>
  </widget>

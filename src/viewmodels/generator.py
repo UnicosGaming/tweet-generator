@@ -20,6 +20,9 @@ class GeneratorViewModel(QtCore.QObject, BaseViewModel):
         super().__init__()
         
         EventChannel().instance().subscribe("image_path_changed", self.__load_images)
+        EventChannel().instance().subscribe("background_reload", self.__load_backgrounds_images)
+        EventChannel().instance().subscribe("logo_teams_reload", self.__load_logo_teams_images)
+        EventChannel().instance().subscribe("logo_competitions_reload", self.__load_logo_competitions_images)
 
         self.__background_index = 0
         self.__logo_team_a_index = 0
@@ -29,12 +32,28 @@ class GeneratorViewModel(QtCore.QObject, BaseViewModel):
         self.__load_images()
 
     def __load_images(self):
-        self.__background_images = self.__load_backgrounds()
-        self.__logo_teams_images = self.__load_logos()
-        self.__competition_images = self.__load_competitions()
-        
-        EventChannel().instance().publish("images_loaded")
+        self.__load_backgrounds_images()
+        self.__load_logo_teams_images()
+        self.__load_logo_competitions_images()
 
+    def __load_backgrounds_images(self):
+        self.__background_images = self.__load_backgrounds()
+
+        EventChannel().instance().publish("backgrounds_loaded")
+
+    def __load_logo_teams_images(self):
+        self.__logo_teams_images = self.__load_logos()
+
+        EventChannel().instance().publish("logo_teams_loaded")
+
+    def __load_logo_competitions_images(self):
+        self.__competition_images = self.__load_competitions()
+
+        EventChannel().instance().publish("logo_competitions_loaded")
+
+    '''
+    Load the backgrounds image paths
+    '''
     def __load_backgrounds(self):
         backgrounds_path = os.path.join(ConfigurationService().instance().get_value("images"), "backgrounds")
         paths = []
@@ -45,6 +64,9 @@ class GeneratorViewModel(QtCore.QObject, BaseViewModel):
         
         return paths
 
+    '''
+    Load the logos paths
+    '''
     def __load_logos(self):
         logo_teams_path = os.path.join(ConfigurationService().instance().get_value("images"), "teams")
         paths = []
@@ -55,6 +77,9 @@ class GeneratorViewModel(QtCore.QObject, BaseViewModel):
         
         return paths
 
+    '''
+    Load the competition logo paths 
+    '''
     def __load_competitions(self):
         logo_competition_path = os.path.join(ConfigurationService().instance().get_value("images"), "competitions")
         paths = []
@@ -65,6 +90,9 @@ class GeneratorViewModel(QtCore.QObject, BaseViewModel):
         
         return paths
 
+    '''
+    Change the index over the background images and emit the new image path
+    '''
     def change_background(self):
         if len(self.__background_images) == 0: return
 
@@ -75,6 +103,9 @@ class GeneratorViewModel(QtCore.QObject, BaseViewModel):
         
         self.on_background_changed.emit(self.__background_images[self.__background_index])
 
+    '''
+    Change the index over the logo team a images and emit the new image path
+    '''
     def change_logo_team_a(self, direction):
         if len(self.__logo_teams_images) == 0: return
 
@@ -87,6 +118,9 @@ class GeneratorViewModel(QtCore.QObject, BaseViewModel):
 
         self.on_team_a_changed.emit(self.__logo_teams_images[self.__logo_team_a_index])
 
+    '''
+    Change the index over the logo team b images and emit the new image path
+    '''
     def change_logo_team_b(self, direction):
         if len(self.__logo_teams_images) == 0: return
 
@@ -98,7 +132,10 @@ class GeneratorViewModel(QtCore.QObject, BaseViewModel):
             self.__logo_team_b_index = len(self.__logo_teams_images) - 1
 
         self.on_team_b_changed.emit(self.__logo_teams_images[self.__logo_team_b_index])
-
+    
+    '''
+    Change the index over the competition images and emit the new image path
+    '''
     def change_competition(self):
         if len(self.__competition_images) == 0: return
 
@@ -118,6 +155,9 @@ class GeneratorViewModel(QtCore.QObject, BaseViewModel):
 
         return controls[team]
     
+    '''
+    Check if the application is configured
+    '''
     def is_configured(self):
         return ConfigurationService().instance().get_value("configured")
     
