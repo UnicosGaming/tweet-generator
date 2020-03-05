@@ -25,6 +25,7 @@ class GeneratorView(QtWidgets.QMainWindow, Ui_MainWindow):
             self.configure_tab_controls()
             # Establish the application window icon
             self.set_window_icon()
+            self.set_window_title()
             
             # Initialize the application with some images
             self.initialize_screen()
@@ -98,6 +99,13 @@ class GeneratorView(QtWidgets.QMainWindow, Ui_MainWindow):
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(icon_path), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.setWindowIcon(icon)
+
+    '''
+    Add the team to the window title 
+    '''
+    def set_window_title(self):
+        title = f"{self.windowTitle()} :: {ConfigurationService().instance().get_value('team')}"
+        self.setWindowTitle(title)
 
     def change_result_team_a(self, value):
         self.lbl_local.setText(value)
