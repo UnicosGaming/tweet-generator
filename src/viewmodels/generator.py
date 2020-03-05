@@ -149,12 +149,12 @@ class GeneratorViewModel(QtCore.QObject, BaseViewModel):
     '''
     Return the tab key for the configured team
     '''
-    def get_control_tab(self):
+    def get_controls_tab(self, control):
         team = ConfigurationService().instance().get_value("team")
         controls = ConfigurationService().instance().get_value("controls")
 
-        return controls[team]
-    
+        return controls[team][control]
+        
     '''
     Check if the application is configured
     '''

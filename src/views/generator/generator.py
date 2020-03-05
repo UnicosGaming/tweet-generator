@@ -24,8 +24,9 @@ class GeneratorView(QtWidgets.QMainWindow, Ui_MainWindow):
         self.configure_signals()
 
         if self.is_configured():
-            # Change the controls available for the configured team
-            self.configure_tab_controls()
+            # Change the inputs and panel tab available for the configured team
+            self.configure_inputs_tab()
+            self.configure_panel_tab()
             # Establish the application window icon
             self.set_window_icon()
             self.set_window_title()
@@ -96,10 +97,10 @@ class GeneratorView(QtWidgets.QMainWindow, Ui_MainWindow):
         self.viewmodel.change_logo_team_b(Direction.FORWARD)
 
     '''
-    Remove all control tabs except for the configured team
+    Remove all input tabs except for the configured team
     '''
-    def configure_tab_controls(self):
-        tabKey = self.viewmodel.get_control_tab()
+    def configure_inputs_tab(self):
+        tabKey = self.viewmodel.get_controls_tab("inputs")
         tabs_to_remove = []
         for x in range(self.tbControls.count()):
             if not tabKey == self.tbControls.widget(x).objectName():
@@ -107,6 +108,20 @@ class GeneratorView(QtWidgets.QMainWindow, Ui_MainWindow):
         
         for x in tabs_to_remove:
             self.tbControls.removeTab(x)
+
+    '''
+    Remove all panels except for the configured team
+    '''
+    def configure_panel_tab(self):
+        tabKey = self.viewmodel.get_controls_tab("panel")
+        tabs_to_remove = []
+        for x in range(self.tbPanel.count()):
+            print(self.tbPanel.widget(x).objectName())
+            if not tabKey == self.tbPanel.widget(x).objectName():
+                tabs_to_remove.append(x)
+        
+        for x in tabs_to_remove:
+            self.tbPanel.removeTab(x)
 
     '''
     Set the application icon on title bar
