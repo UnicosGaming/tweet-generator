@@ -66,7 +66,7 @@
     <property name="geometry">
      <rect>
       <x>90</x>
-      <y>230</y>
+      <y>200</y>
       <width>200</width>
       <height>200</height>
      </rect>
@@ -78,8 +78,8 @@
    <widget class="QLabel" name="lbl_logo_team_b">
     <property name="geometry">
      <rect>
-      <x>710</x>
-      <y>230</y>
+      <x>720</x>
+      <y>200</y>
       <width>200</width>
       <height>200</height>
      </rect>
@@ -93,8 +93,8 @@
      <rect>
       <x>20</x>
       <y>60</y>
-      <width>151</width>
-      <height>101</height>
+      <width>80</width>
+      <height>80</height>
      </rect>
     </property>
     <property name="text">
@@ -105,7 +105,7 @@
     <property name="geometry">
      <rect>
       <x>470</x>
-      <y>290</y>
+      <y>260</y>
       <width>70</width>
       <height>70</height>
      </rect>
@@ -124,12 +124,15 @@
     <property name="text">
      <string>VS</string>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
    </widget>
    <widget class="QLabel" name="lbl_local">
     <property name="geometry">
      <rect>
       <x>340</x>
-      <y>270</y>
+      <y>240</y>
       <width>120</width>
       <height>100</height>
      </rect>
@@ -149,14 +152,14 @@
      <string>0</string>
     </property>
     <property name="alignment">
-     <set>Qt::AlignCenter</set>
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
    </widget>
    <widget class="QLabel" name="lbl_visitor">
     <property name="geometry">
      <rect>
       <x>550</x>
-      <y>270</y>
+      <y>240</y>
       <width>120</width>
       <height>100</height>
      </rect>
@@ -176,7 +179,7 @@
      <string>0</string>
     </property>
     <property name="alignment">
-     <set>Qt::AlignCenter</set>
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
     </property>
    </widget>
    <widget class="QLabel" name="lbl_description">
@@ -455,7 +458,7 @@
      <widget class="QPushButton" name="btnBackVisitorAB">
       <property name="geometry">
        <rect>
-        <x>720</x>
+        <x>730</x>
         <y>10</y>
         <width>31</width>
         <height>23</height>
@@ -489,7 +492,7 @@
      <widget class="QLineEdit" name="txtResultLocalAB">
       <property name="geometry">
        <rect>
-        <x>410</x>
+        <x>420</x>
         <y>11</y>
         <width>31</width>
         <height>23</height>
@@ -514,7 +517,7 @@
      <widget class="QPushButton" name="btnNextVisitorAB">
       <property name="geometry">
        <rect>
-        <x>830</x>
+        <x>840</x>
         <y>10</y>
         <width>31</width>
         <height>23</height>
@@ -527,7 +530,7 @@
      <widget class="QLabel" name="label_5">
       <property name="geometry">
        <rect>
-        <x>450</x>
+        <x>460</x>
         <y>12</y>
         <width>81</width>
         <height>17</height>
@@ -548,7 +551,7 @@
      <widget class="QLineEdit" name="txtResultVisitorAB">
       <property name="geometry">
        <rect>
-        <x>530</x>
+        <x>540</x>
         <y>10</y>
         <width>31</width>
         <height>23</height>
@@ -573,7 +576,7 @@
      <widget class="QLabel" name="label_6">
       <property name="geometry">
        <rect>
-        <x>760</x>
+        <x>770</x>
         <y>12</y>
         <width>71</width>
         <height>17</height>
@@ -596,7 +599,7 @@
        <rect>
         <x>212</x>
         <y>50</y>
-        <width>541</width>
+        <width>551</width>
         <height>31</height>
        </rect>
       </property>
