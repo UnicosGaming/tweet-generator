@@ -5,6 +5,7 @@ from functools import partial
 
 from PyQt5 import QtWidgets, QtGui 
 from PyQt5 import QtCore
+from PyQt5.QtWidgets import QApplication
 
 from src.views.generator.generatorUI import Ui_MainWindow
 from src.views.configuration.configurationUI import Ui_Dialog as Configuration_UI
@@ -22,10 +23,8 @@ class GeneratorViewBase(QtWidgets.QMainWindow, Ui_MainWindow):
         # Event subscriptions
         EventChannel().instance().subscribe("configuration_team_changed", self.__ask_for_restart)
 
-        # self.configuration_s = ConfigurationService()
         self.viewmodel = viewmodel
         self.setupUi(self)
-        # self.configure_signals()
 
         # Change the inputs and panel tab available for the configured team
         self.configure_inputs_tab()
@@ -33,13 +32,11 @@ class GeneratorViewBase(QtWidgets.QMainWindow, Ui_MainWindow):
         # Establish the application window icon
         self.set_window_icon()
         self.set_window_title()
-        
-        # Initialize the application with some images
-        # self.initialize_screen()
 
     def configure_signals(self):
         # GUI signals
         self.btnChange_Background.clicked.connect(self.viewmodel.change_background)
+        self.btn_save_image_r.clicked.connect(self.__save_image)
         self.btnChange_Competition.clicked.connect(self.viewmodel.change_competition)
         self.actionConfiguration.triggered.connect(self.open_configuration_dialog)
         self.action_UpdateImageLibrary.triggered.connect(lambda: EventChannel().instance().publish("image_path_changed"))
@@ -167,7 +164,7 @@ class GeneratorViewBase(QtWidgets.QMainWindow, Ui_MainWindow):
         if os.path.exists(image_path):
             image = QtGui.QImage(image_path)
             pixmap = QtGui.QPixmap.fromImage(image)
-            
+
             return pixmap
         
         path = Path(image_path)
@@ -193,3 +190,19 @@ class GeneratorViewBase(QtWidgets.QMainWindow, Ui_MainWindow):
         if response:
             python = sys.executable
             os.execl(python, python, * sys.argv)
+
+    '''
+    Capture and save the image
+    '''
+    def __save_image(self):
+        image_position = self.tbPanel.mapToGlobal(self.lbl_background.pos())
+        width = self.lbl_background.geometry().width()
+        height = self.lbl_background.geometry().height()
+
+        screen = QApplication.primaryScreen()
+        capture = screen.grabWindow(QApplication.desktop().winId(), image_position.x() + 2, image_position.y() + 2, width, height)
+
+        file_name = DialogService().instance().show_save_file(self, "Nombre de la imágen")
+
+        if file_name:
+            capture.save(file_name)

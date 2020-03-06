@@ -2,11 +2,11 @@ import os
 import sys
 
 from PyQt5 import QtWidgets, QtGui, QtCore
-from PyQt5.QtWidgets import QFileDialog, QMessageBox
 from PyQt5.QtCore import pyqtSignal
 
 from src.views.configuration.configurationUI import Ui_Dialog
 from src.services.event_channel import EventChannel
+from src.services.dialog import DialogService
 
 class ConfigurationView(QtWidgets.QMainWindow, Ui_Dialog):
     on_configuration_changed = pyqtSignal()
@@ -35,13 +35,10 @@ class ConfigurationView(QtWidgets.QMainWindow, Ui_Dialog):
         self.btnFolderDialog.clicked.connect(self.open_folder_dialog)
 
     def open_folder_dialog(self):
-        options = QFileDialog.Options()
-        options |= QFileDialog.ShowDirsOnly | QFileDialog.DontUseNativeDialog | QFileDialog.DontResolveSymlinks
+        folder_name = DialogService().instance().show_open_folder(self, "Selecciona el directorio")
 
-        foldername = QFileDialog.getExistingDirectory(self, "Selecciona el directorio", options=options)
-
-        if foldername:
-            self.txtImagesFolderPath.setText(foldername)
+        if folder_name:
+            self.txtImagesFolderPath.setText(folder_name)
 
     '''
     Re-implement the closeEvent handler from Dialog in order to catch such event
@@ -54,19 +51,14 @@ class ConfigurationView(QtWidgets.QMainWindow, Ui_Dialog):
         images_path = self.get_images_path()
 
         if team == None:
-            close = QtWidgets.QMessageBox.information(self, 
-            "Selecciona el equipo", "Debes seleccionar un equipo de la lista",
-            QtWidgets.QMessageBox.Close)
+            DialogService().instance().show_information(self, "Selecciona el equipo", "Debes seleccionar un equipo de la lista")
 
             event.ignore()
             return
 
         if images_path == None:
-            close = QtWidgets.QMessageBox.information(self,
-            "Selecciona la ruta de las imágenes",
-            "Debes seleccionar la ruta válida donde se guardan las imágenes y logos",
-            QtWidgets.QMessageBox.Close)
-
+            DialogService().instance().show_information(self, "Selecciona la ruta de las imágenes", "Debes seleccionar la ruta válida donde se guardan las imágenes y logos")
+            
             event.ignore()
             return
 
