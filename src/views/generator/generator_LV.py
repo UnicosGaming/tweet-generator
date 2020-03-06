@@ -8,6 +8,8 @@ class GeneratorViewLV(GeneratorViewBase):
 
         self.configure_signals()
 
+        self.initialize_screen()
+
     def configure_signals(self):
         super().configure_signals()
         

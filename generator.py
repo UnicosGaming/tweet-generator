@@ -18,8 +18,8 @@ from src.services.factory_view_service import FactoryViewService
 
 class Program():
     def __init__(self):
-        pass
         EventChannel().instance().subscribe("configuration_team_changed", self.__initialize_view)
+
     '''
     Add the custom font to the resources
     '''
@@ -51,7 +51,6 @@ class Program():
             configuration_v = ConfigurationView(configuration_gui, viewmodel=configuration_vm)
             self.configuration_dialog = configuration_v 
             configuration_v.show()
-
 
         sys.exit(app.exec())
 

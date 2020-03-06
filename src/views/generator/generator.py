@@ -25,7 +25,7 @@ class GeneratorViewBase(QtWidgets.QMainWindow, Ui_MainWindow):
         # self.configuration_s = ConfigurationService()
         self.viewmodel = viewmodel
         self.setupUi(self)
-        self.configure_signals()
+        # self.configure_signals()
 
         # Change the inputs and panel tab available for the configured team
         self.configure_inputs_tab()
@@ -35,7 +35,7 @@ class GeneratorViewBase(QtWidgets.QMainWindow, Ui_MainWindow):
         self.set_window_title()
         
         # Initialize the application with some images
-        self.initialize_screen()
+        # self.initialize_screen()
 
     def configure_signals(self):
         # GUI signals
@@ -128,7 +128,7 @@ class GeneratorViewBase(QtWidgets.QMainWindow, Ui_MainWindow):
         self.lbl_description.setText(value)
 
     def change_background(self, image_path):
-        image = self.__try_get_image(image_path)
+        image = self.try_get_image(image_path)
 
         if image is None:
             EventChannel().instance().publish("background_reload")
@@ -136,7 +136,7 @@ class GeneratorViewBase(QtWidgets.QMainWindow, Ui_MainWindow):
             self.lbl_background.setPixmap(image.scaled(self.lbl_background.size()))
 
     def change_logo_team_a(self, image_path):
-        image = self.__try_get_image(image_path)
+        image = self.try_get_image(image_path)
 
         if image is None:
             EventChannel().instance().publish("logo_teams_reload")
@@ -144,7 +144,7 @@ class GeneratorViewBase(QtWidgets.QMainWindow, Ui_MainWindow):
             self.lbl_logo_team_a.setPixmap(image.scaled(self.lbl_logo_team_a.size()))
 
     def change_logo_team_b(self, image_path):
-        image = self.__try_get_image(image_path)
+        image = self.try_get_image(image_path)
 
         if image is None:
             EventChannel().instance().publish("logo_teams_reload")
@@ -152,7 +152,7 @@ class GeneratorViewBase(QtWidgets.QMainWindow, Ui_MainWindow):
             self.lbl_logo_team_b.setPixmap(image.scaled(self.lbl_logo_team_b.size()))
     
     def change_logo_competition(self, image_path):
-        image = self.__try_get_image(image_path)
+        image = self.try_get_image(image_path)
 
         if image is None:
             EventChannel().instance().publish("logo_competitions_reload")
@@ -162,7 +162,7 @@ class GeneratorViewBase(QtWidgets.QMainWindow, Ui_MainWindow):
     '''
     Return the pixmap image if available
     '''
-    def __try_get_image(self, image_path):
+    def try_get_image(self, image_path):
         # Check if the image still existing
         if os.path.exists(image_path):
             image = QtGui.QImage(image_path)

@@ -38,7 +38,7 @@ class GeneratorViewModel(QtCore.QObject, ViewModelBase):
 
     def __load_backgrounds_images(self):
         self.__background_images = self.__load_backgrounds()
-
+        
         EventChannel().instance().publish("backgrounds_loaded")
 
     def __load_logo_teams_images(self):
