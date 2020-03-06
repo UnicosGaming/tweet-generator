@@ -472,7 +472,7 @@
        <string>Piloto</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="txtDriver">
+     <widget class="QLineEdit" name="txt_driver">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -482,7 +482,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="QLineEdit" name="txtCar">
+     <widget class="QLineEdit" name="txt_car">
       <property name="geometry">
        <rect>
         <x>170</x>
@@ -492,7 +492,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="QLineEdit" name="txtPosition">
+     <widget class="QLineEdit" name="txt_position">
       <property name="geometry">
        <rect>
         <x>330</x>
@@ -540,7 +540,7 @@
        <string>Posición</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="txtTrack">
+     <widget class="QLineEdit" name="txt_track">
       <property name="geometry">
        <rect>
         <x>490</x>
@@ -587,7 +587,7 @@
      <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <property name="tabBarAutoHide">
      <bool>true</bool>
@@ -636,7 +636,7 @@
        <string>Cambiar fondo</string>
       </property>
      </widget>
-     <widget class="QLabel" name="lbl_league">
+     <widget class="QLabel" name="lbl_competition">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -804,8 +804,8 @@
      <zorder>lbl_logo_team_b</zorder>
      <zorder>lbl_visitor</zorder>
      <zorder>lbl_vs</zorder>
-     <zorder>lbl_league</zorder>
      <zorder>lbl_description</zorder>
+     <zorder>lbl_competition</zorder>
     </widget>
     <widget class="QWidget" name="tbPosition">
      <attribute name="title">
@@ -815,16 +815,16 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>1</y>
+        <y>41</y>
         <width>1021</width>
-        <height>531</height>
+        <height>491</height>
        </rect>
       </property>
       <property name="text">
        <string/>
       </property>
      </widget>
-     <widget class="QLabel" name="label_8">
+     <widget class="QLabel" name="lbl_pilot">
       <property name="geometry">
        <rect>
         <x>230</x>
@@ -846,7 +846,7 @@
        <string>Piloto</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_11">
+     <widget class="QLabel" name="lbl_car">
       <property name="geometry">
        <rect>
         <x>230</x>
@@ -868,7 +868,7 @@
        <string>Coche</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_12">
+     <widget class="QLabel" name="lbl_track">
       <property name="geometry">
        <rect>
         <x>230</x>
@@ -890,7 +890,7 @@
        <string>Circuito</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_13">
+     <widget class="QLabel" name="lbl_position">
       <property name="geometry">
        <rect>
         <x>770</x>
@@ -912,7 +912,7 @@
        <string>22</string>
       </property>
      </widget>
-     <widget class="QLabel" name="lbl_logo_team_a_2">
+     <widget class="QLabel" name="lbl_logo_p">
       <property name="geometry">
        <rect>
         <x>20</x>
@@ -923,6 +923,26 @@
       </property>
       <property name="text">
        <string>TextLabel</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_change_background_p">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>150</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Cambiar fondo</string>
       </property>
      </widget>
     </widget>

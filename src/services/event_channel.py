@@ -24,11 +24,14 @@ class EventChannel():
         if event not in self.subscribers.keys():
             self.subscribers[event] = [callback]
         else:
-            self.subscribers[event].append(callback)
+            if callback not in self.subscribers[event]:
+                self.subscribers[event].append(callback)
 
     def unsubscribe(self, event, callback):
         if event is not None or event != "" and event in self.subscribers.keys():
-            self.subscribers[event] = list(filter(lambda x: x is not callback, self.subscribers[event]))
+            # self.subscribers[event] = list(filter(lambda x: x is not callback, self.subscribers[event]))
+            if callback in self.subscribers[event]:
+                self.subscribers[event].remove(callback)
 
     def publish(self, event, args = None):
         if event in self.subscribers.keys():

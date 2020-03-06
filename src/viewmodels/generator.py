@@ -7,9 +7,9 @@ from PyQt5.QtCore import pyqtSignal
 from src.services.configuration import ConfigurationService
 from src.services.event_channel import EventChannel
 
-from src.viewmodels.base import BaseViewModel
+from src.viewmodels.base import ViewModelBase
 
-class GeneratorViewModel(QtCore.QObject, BaseViewModel):
+class GeneratorViewModel(QtCore.QObject, ViewModelBase):
     on_background_changed = pyqtSignal(str)
     on_team_a_changed = pyqtSignal(str)
     on_team_b_changed = pyqtSignal(str)
@@ -19,7 +19,7 @@ class GeneratorViewModel(QtCore.QObject, BaseViewModel):
     def __init__(self):
         super().__init__()
         
-        EventChannel().instance().subscribe("image_path_changed", self.__load_images)
+        EventChannel().instance().subscribe("configuration_image_path_changed", self.__load_images)
         EventChannel().instance().subscribe("background_reload", self.__load_backgrounds_images)
         EventChannel().instance().subscribe("logo_teams_reload", self.__load_logo_teams_images)
         EventChannel().instance().subscribe("logo_competitions_reload", self.__load_logo_competitions_images)

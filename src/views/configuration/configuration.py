@@ -84,27 +84,11 @@ class ConfigurationView(QtWidgets.QMainWindow, Ui_Dialog):
             self.viewmodel.save()
             self.viewmodel.load_configuration()
 
-        # Restart the application
-        if is_team_changed and self.ask_for_restart():
-            # TODO: Move this code to a system class o something
-            python = sys.executable
-            os.execl(python, python, * sys.argv)
+        if is_team_changed:
+            EventChannel().instance().publish("configuration_team_changed")
 
         if is_image_path_changed:
-            EventChannel().instance().publish("image_path_changed")
-
-    '''
-    Show a dialog asking for restart the application
-    '''
-    def ask_for_restart(self):
-        dlg = QMessageBox()
-        dlg.setWindowTitle("Reiniciar aplicación")
-        dlg.setText("Los cambios se aplicarán después de reiniciar la aplicación. ¿Desea reiniciar ahora?")
-        dlg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
-        if dlg.exec() == QMessageBox.Ok:
-            return True
-        
-        return False
+            EventChannel().instance().publish("configuration_image_path_changed")
 
     '''
     Returns the selected team from the listView

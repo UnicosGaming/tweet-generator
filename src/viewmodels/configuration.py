@@ -1,9 +1,9 @@
 import os
 
 from src.services.configuration import ConfigurationService
-from src.viewmodels.base import BaseViewModel
+from src.viewmodels.base import ViewModelBase
 
-class ConfigurationViewModel(BaseViewModel):
+class ConfigurationViewModel(ViewModelBase):
     def __init__(self):
         super().__init__()
 

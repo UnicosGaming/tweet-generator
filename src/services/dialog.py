@@ -12,13 +12,20 @@ class DialogService():
 
         return DialogService.__instance
 
-    '''
-    Show a dialog with the OK button.
-    Return True if OK, otherwise False
-    '''
     def show_ok(self, title, message):
         dlg = QMessageBox()
         dlg.setWindowTitle(title)
         dlg.setText(message)
         dlg.setStandardButtons(QMessageBox.Ok)
         dlg.exec()
+
+    def show_ok_cancel(self, title, message):
+        dlg = QMessageBox()
+        dlg.setWindowTitle(title)
+        dlg.setText(message)
+        dlg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+
+        if dlg.exec() == QMessageBox.Ok:
+            return True
+        
+        return False

@@ -1,4 +1,5 @@
 import os
+import sys
 from pathlib import Path
 from functools import partial
 
@@ -14,27 +15,27 @@ from src.services.event_channel import EventChannel
 from src.services.dialog import DialogService
 from src.enums.Directions import Direction
 
-
-class GeneratorView(QtWidgets.QMainWindow, Ui_MainWindow):
-    def __init__(self, gui, viewmodel, parent=None):
+class GeneratorViewBase(QtWidgets.QMainWindow, Ui_MainWindow):
+    def __init__(self, gui, viewmodel, parent):
         super().__init__(parent)
+
+        # Event subscriptions
+        EventChannel().instance().subscribe("configuration_team_changed", self.__ask_for_restart)
+
         # self.configuration_s = ConfigurationService()
         self.viewmodel = viewmodel
         self.setupUi(self)
         self.configure_signals()
 
-        if self.is_configured():
-            # Change the inputs and panel tab available for the configured team
-            self.configure_inputs_tab()
-            self.configure_panel_tab()
-            # Establish the application window icon
-            self.set_window_icon()
-            self.set_window_title()
-            
-            # Initialize the application with some images
-            self.initialize_screen()
-        else:
-            self.initialize_configuration()
+        # Change the inputs and panel tab available for the configured team
+        self.configure_inputs_tab()
+        self.configure_panel_tab()
+        # Establish the application window icon
+        self.set_window_icon()
+        self.set_window_title()
+        
+        # Initialize the application with some images
+        self.initialize_screen()
 
     def configure_signals(self):
         # GUI signals
@@ -42,24 +43,6 @@ class GeneratorView(QtWidgets.QMainWindow, Ui_MainWindow):
         self.btnChange_Competition.clicked.connect(self.viewmodel.change_competition)
         self.actionConfiguration.triggered.connect(self.open_configuration_dialog)
         self.action_UpdateImageLibrary.triggered.connect(lambda: EventChannel().instance().publish("image_path_changed"))
-        
-        # Tab Local - Visitor
-        self.txtResultLocalLV.textChanged.connect(self.change_result_team_a)
-        self.txtResultVisitorLV.textChanged.connect(self.change_result_team_b)
-        self.txtMessageLV.textChanged.connect(self.change_image_message)
-        self.btnNextLocalLV.clicked.connect(partial(self.viewmodel.change_logo_team_a, Direction.FORWARD))
-        self.btnBackLocalLV.clicked.connect(partial(self.viewmodel.change_logo_team_a, Direction.BACKWARD))
-        self.btnNextVisitorLV.clicked.connect(partial(self.viewmodel.change_logo_team_b, Direction.FORWARD))
-        self.btnBackVisitorLV.clicked.connect(partial(self.viewmodel.change_logo_team_b, Direction.BACKWARD))
-
-        # Tab A - B
-        self.txtResultLocalAB.textChanged.connect(self.change_result_team_a)
-        self.txtResultVisitorAB.textChanged.connect(self.change_result_team_b)
-        self.txtMessageAB.textChanged.connect(self.change_image_message)
-        self.btnNextLocalAB.clicked.connect(partial(self.viewmodel.change_logo_team_a, Direction.FORWARD))
-        self.btnBackLocalAB.clicked.connect(partial(self.viewmodel.change_logo_team_a, Direction.BACKWARD))
-        self.btnNextVisitorAB.clicked.connect(partial(self.viewmodel.change_logo_team_b, Direction.FORWARD))
-        self.btnBackVisitorAB.clicked.connect(partial(self.viewmodel.change_logo_team_b, Direction.BACKWARD))
 
         # ViewModel signals
         self.viewmodel.on_background_changed.connect(self.change_background)
@@ -71,14 +54,6 @@ class GeneratorView(QtWidgets.QMainWindow, Ui_MainWindow):
         EventChannel().instance().subscribe("backgrounds_loaded", self.viewmodel.change_background)
         EventChannel().instance().subscribe("logo_teams_loaded", self.__initialize_logo_teams)
         EventChannel().instance().subscribe("logo_competitions_loaded", self.viewmodel.change_competition)
-
-
-
-    def is_configured(self):
-        return self.viewmodel.is_configured()
-
-    def initialize_configuration(self):
-        self.open_configuration_dialog()
 
     '''
     Initialize the window with all available images
@@ -103,24 +78,28 @@ class GeneratorView(QtWidgets.QMainWindow, Ui_MainWindow):
         tabKey = self.viewmodel.get_controls_tab("inputs")
         tabs_to_remove = []
         for x in range(self.tbControls.count()):
-            if not tabKey == self.tbControls.widget(x).objectName():
-                tabs_to_remove.append(x)
+            if tabKey == self.tbControls.widget(x).objectName():
+                continue
+            
+            tabs_to_remove.append(x)
         
-        for x in tabs_to_remove:
+        # Remove the tabs by index, so we need to start by the higher value
+        for x in sorted(tabs_to_remove, reverse=True):
             self.tbControls.removeTab(x)
 
     '''
-    Remove all panels except for the configured team
+    Remove all panels except for the configura ed team
     '''
     def configure_panel_tab(self):
         tabKey = self.viewmodel.get_controls_tab("panel")
         tabs_to_remove = []
         for x in range(self.tbPanel.count()):
-            print(self.tbPanel.widget(x).objectName())
-            if not tabKey == self.tbPanel.widget(x).objectName():
-                tabs_to_remove.append(x)
+            if tabKey == self.tbPanel.widget(x).objectName():
+                continue
+            
+            tabs_to_remove.append(x)
         
-        for x in tabs_to_remove:
+        for x in sorted(tabs_to_remove, reverse=True):
             self.tbPanel.removeTab(x)
 
     '''
@@ -178,7 +157,7 @@ class GeneratorView(QtWidgets.QMainWindow, Ui_MainWindow):
         if image is None:
             EventChannel().instance().publish("logo_competitions_reload")
         else:
-            self.lbl_league.setPixmap(image.scaled(self.lbl_league.size()))
+            self.lbl_competition.setPixmap(image.scaled(self.lbl_competition.size()))
 
     '''
     Return the pixmap image if available
@@ -205,3 +184,12 @@ class GeneratorView(QtWidgets.QMainWindow, Ui_MainWindow):
         configuration_v = ConfigurationView(configuration_gui, viewmodel=configuration_vm)
         self.configuration_dialog = configuration_v 
         configuration_v.show()
+
+    '''
+    Show a dialog asking for restart the application
+    '''
+    def __ask_for_restart(self):
+        response = DialogService().instance().show_ok_cancel("Reiniciar aplicación", "Los cambios se aplicarán después de reiniciar la aplicación. ¿Desea reiniciar ahora?")
+        if response:
+            python = sys.executable
+            os.execl(python, python, * sys.argv)
