@@ -45,7 +45,7 @@
      <enum>QTabWidget::Rounded</enum>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>1</number>
     </property>
     <property name="documentMode">
      <bool>false</bool>
@@ -244,7 +244,7 @@
        <number>150</number>
       </property>
       <property name="placeholderText">
-       <string>Escribe el mensaje que aparecerá en la imágen</string>
+       <string>Escribe el mensaje que aparecerá en la imagen</string>
       </property>
       <property name="clearButtonEnabled">
        <bool>false</bool>
@@ -416,7 +416,7 @@
        <number>150</number>
       </property>
       <property name="placeholderText">
-       <string>Escribe el mensaje que aparecerá en la imágen</string>
+       <string>Escribe el mensaje que aparecerá en la imagen</string>
       </property>
       <property name="clearButtonEnabled">
        <bool>false</bool>
@@ -610,7 +610,7 @@
      <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <property name="tabBarAutoHide">
      <bool>true</bool>
@@ -848,7 +848,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Guardar imágen</string>
+       <string>Guardar imagen</string>
       </property>
      </widget>
      <zorder>btnChange_Competition</zorder>
@@ -1011,7 +1011,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Guardar imágen</string>
+       <string>Guardar imagen</string>
       </property>
      </widget>
      <widget class="QLabel" name="lbl_position_2">
@@ -1060,7 +1060,7 @@
     <property name="title">
      <string>Herramientas</string>
     </property>
-    <addaction name="action_UpdateImageLibrary"/>
+    <addaction name="actionUpdateImageLibrary"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuHerramientas"/>
@@ -1073,10 +1073,10 @@
   </action>
   <action name="actionQuit">
    <property name="text">
-    <string>Quit</string>
+    <string>Salir</string>
    </property>
   </action>
-  <action name="action_UpdateImageLibrary">
+  <action name="actionUpdateImageLibrary">
    <property name="text">
     <string>Actualizar biblioteca de imágenes</string>
    </property>

@@ -39,7 +39,8 @@ class GeneratorViewBase(QtWidgets.QMainWindow, Ui_MainWindow):
         self.btn_save_image_r.clicked.connect(self.__save_image)
         self.btnChange_Competition.clicked.connect(self.viewmodel.change_competition)
         self.actionConfiguration.triggered.connect(self.open_configuration_dialog)
-        self.action_UpdateImageLibrary.triggered.connect(lambda: EventChannel().instance().publish("update_images_libary"))
+        self.actionUpdateImageLibrary.triggered.connect(lambda: EventChannel().instance().publish("update_images_libary"))
+        self.actionQuit.triggered.connect(lambda: QApplication.quit())
 
         # ViewModel signals
         self.viewmodel.on_background_changed.connect(self.change_background)
