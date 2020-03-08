@@ -39,7 +39,7 @@ class GeneratorViewBase(QtWidgets.QMainWindow, Ui_MainWindow):
         self.btn_save_image_r.clicked.connect(self.__save_image)
         self.btnChange_Competition.clicked.connect(self.viewmodel.change_competition)
         self.actionConfiguration.triggered.connect(self.open_configuration_dialog)
-        self.action_UpdateImageLibrary.triggered.connect(lambda: EventChannel().instance().publish("image_path_changed"))
+        self.action_UpdateImageLibrary.triggered.connect(lambda: EventChannel().instance().publish("update_images_libary"))
 
         # ViewModel signals
         self.viewmodel.on_background_changed.connect(self.change_background)
@@ -128,7 +128,7 @@ class GeneratorViewBase(QtWidgets.QMainWindow, Ui_MainWindow):
         image = self.try_get_image(image_path)
 
         if image is None:
-            EventChannel().instance().publish("background_reload")
+            EventChannel().instance().publish("load_backgrounds")
         else:
             self.lbl_background.setPixmap(image.scaled(self.lbl_background.size()))
 
@@ -136,7 +136,7 @@ class GeneratorViewBase(QtWidgets.QMainWindow, Ui_MainWindow):
         image = self.try_get_image(image_path)
 
         if image is None:
-            EventChannel().instance().publish("logo_teams_reload")
+            EventChannel().instance().publish("load_logo_teams")
         else:
             self.lbl_logo_team_a.setPixmap(image.scaled(self.lbl_logo_team_a.size()))
 
@@ -144,7 +144,7 @@ class GeneratorViewBase(QtWidgets.QMainWindow, Ui_MainWindow):
         image = self.try_get_image(image_path)
 
         if image is None:
-            EventChannel().instance().publish("logo_teams_reload")
+            EventChannel().instance().publish("load_logo_teams")
         else:
             self.lbl_logo_team_b.setPixmap(image.scaled(self.lbl_logo_team_b.size()))
     
@@ -152,7 +152,7 @@ class GeneratorViewBase(QtWidgets.QMainWindow, Ui_MainWindow):
         image = self.try_get_image(image_path)
 
         if image is None:
-            EventChannel().instance().publish("logo_competitions_reload")
+            EventChannel().instance().publish("load_logo_competitions")
         else:
             self.lbl_competition.setPixmap(image.scaled(self.lbl_competition.size()))
 
@@ -164,7 +164,7 @@ class GeneratorViewBase(QtWidgets.QMainWindow, Ui_MainWindow):
         if os.path.exists(image_path):
             image = QtGui.QImage(image_path)
             pixmap = QtGui.QPixmap.fromImage(image)
-
+            
             return pixmap
         
         path = Path(image_path)

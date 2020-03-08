@@ -55,6 +55,6 @@ class GeneratorViewP(GeneratorViewBase):
         image = self.try_get_image(image_path)
 
         if image is None:
-            EventChannel().instance().publish("background_reload")
+            EventChannel().instance().publish("load_backgrounds")
         else:
             self.lbl_background_panel_p.setPixmap(image.scaled(self.lbl_background.size()))

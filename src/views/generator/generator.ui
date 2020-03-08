@@ -23,7 +23,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>UG Tweet Generator</string>
+   <string>UG Tweets</string>
   </property>
   <property name="autoFillBackground">
    <bool>false</bool>
@@ -610,7 +610,7 @@
      <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <property name="tabBarAutoHide">
      <bool>true</bool>
@@ -669,7 +669,10 @@
        </rect>
       </property>
       <property name="text">
-       <string>TextLabel</string>
+       <string/>
+      </property>
+      <property name="scaledContents">
+       <bool>false</bool>
       </property>
      </widget>
      <widget class="QLabel" name="lbl_visitor">
@@ -709,7 +712,10 @@
        </rect>
       </property>
       <property name="text">
-       <string>TextLabel</string>
+       <string/>
+      </property>
+      <property name="scaledContents">
+       <bool>false</bool>
       </property>
      </widget>
      <widget class="QLabel" name="lbl_background">
@@ -722,7 +728,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>TextLabel</string>
+       <string/>
       </property>
      </widget>
      <widget class="QLabel" name="lbl_logo_team_a">
@@ -735,7 +741,10 @@
        </rect>
       </property>
       <property name="text">
-       <string>TextLabel</string>
+       <string/>
+      </property>
+      <property name="scaledContents">
+       <bool>false</bool>
       </property>
      </widget>
      <widget class="QLabel" name="lbl_local">
@@ -796,9 +805,9 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>450</y>
+        <y>410</y>
         <width>991</width>
-        <height>100</height>
+        <height>121</height>
        </rect>
       </property>
       <property name="font">
@@ -816,7 +825,10 @@
        <string/>
       </property>
       <property name="alignment">
-       <set>Qt::AlignCenter</set>
+       <set>Qt::AlignHCenter|Qt::AlignTop</set>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
       </property>
      </widget>
      <widget class="QPushButton" name="btn_save_image_r">
@@ -1056,7 +1068,7 @@
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionConfiguration">
    <property name="text">
-    <string>Configuration</string>
+    <string>Configuración</string>
    </property>
   </action>
   <action name="actionQuit">

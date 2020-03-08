@@ -80,7 +80,7 @@ class ConfigurationView(QtWidgets.QMainWindow, Ui_Dialog):
             EventChannel().instance().publish("configuration_team_changed")
 
         if is_image_path_changed:
-            EventChannel().instance().publish("configuration_image_path_changed")
+            EventChannel().instance().publish("image_path_changed")
 
     '''
     Returns the selected team from the listView

@@ -19,10 +19,11 @@ class GeneratorViewModel(QtCore.QObject, ViewModelBase):
     def __init__(self):
         super().__init__()
         
-        EventChannel().instance().subscribe("configuration_image_path_changed", self.__load_images)
-        EventChannel().instance().subscribe("background_reload", self.__load_backgrounds_images)
-        EventChannel().instance().subscribe("logo_teams_reload", self.__load_logo_teams_images)
-        EventChannel().instance().subscribe("logo_competitions_reload", self.__load_logo_competitions_images)
+        EventChannel().instance().subscribe("image_path_changed", self.__load_images)
+        EventChannel().instance().subscribe("update_images_libary", self.__load_images)
+        EventChannel().instance().subscribe("load_backgrounds", self.__load_backgrounds_images)
+        EventChannel().instance().subscribe("load_logo_teams", self.__load_logo_teams_images)
+        EventChannel().instance().subscribe("load_logo_competitions", self.__load_logo_competitions_images)
 
         self.__background_index = 0
         self.__logo_team_a_index = 0
