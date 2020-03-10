@@ -1,0 +1,36 @@
+{
+    "team": "",
+    "images": "",
+    "configured": false,
+    "controls": {
+        "csgo": {
+            "view": "viewAB",
+            "inputs": "tbAB",
+            "panel": "tbResult"
+        },
+        "lol": {
+            "view": "viewAB",
+            "inputs": "tbAB",
+            "panel": "tbResult"
+        },
+        "fifa-pc": {
+            "view": "viewLV",
+            "inputs": "tbLV",
+            "panel": "tbResult"
+        },
+        "fifa-ps4": {
+            "view": "viewLV",
+            "inputs": "tbLV",
+            "panel": "tbResult"
+        },
+        "iracing": {
+            "view": "viewP",
+            "inputs": "tbP",
+            "panel": "tbPosition"
+        }
+    },
+    "application": {
+        "icon": "256x256.png",
+        "font": "UnicaOne-Regular.ttf"
+    }
+}
