@@ -23,7 +23,6 @@ class GeneratorViewModel(QtCore.QObject, ViewModelBase):
         EventChannel().instance().subscribe("update_images_libary", self.__load_images)
         EventChannel().instance().subscribe("load_backgrounds", self.__load_backgrounds_images)
         EventChannel().instance().subscribe("load_logo_teams", self.__load_logo_teams_images)
-        EventChannel().instance().subscribe("load_logo_competitions", self.__load_logo_competitions_images)
 
         self.__background_index = 0
         self.__logo_team_a_index = 0
@@ -35,7 +34,6 @@ class GeneratorViewModel(QtCore.QObject, ViewModelBase):
     def __load_images(self):
         self.__load_backgrounds_images()
         self.__load_logo_teams_images()
-        self.__load_logo_competitions_images()
 
     def __load_backgrounds_images(self):
         self.__background_images = self.__load_backgrounds()
@@ -47,10 +45,7 @@ class GeneratorViewModel(QtCore.QObject, ViewModelBase):
 
         EventChannel().instance().publish("logo_teams_loaded")
 
-    def __load_logo_competitions_images(self):
-        self.__competition_images = self.__load_competitions()
 
-        EventChannel().instance().publish("logo_competitions_loaded")
 
     '''
     Load the backgrounds image paths
@@ -78,18 +73,7 @@ class GeneratorViewModel(QtCore.QObject, ViewModelBase):
         
         return paths
 
-    '''
-    Load the competition logo paths 
-    '''
-    def __load_competitions(self):
-        logo_competition_path = os.path.join(ConfigurationService().instance().get_value("images"), "competitions")
-        paths = []
 
-        for d, _, f in os.walk(logo_competition_path):
-            for file in f:
-                paths.append(os.path.join(d,file))
-        
-        return paths
 
     '''
     Change the index over the background images and emit the new image path
@@ -134,18 +118,6 @@ class GeneratorViewModel(QtCore.QObject, ViewModelBase):
 
         self.on_team_b_changed.emit(self.__logo_teams_images[self.__logo_team_b_index])
     
-    '''
-    Change the index over the competition images and emit the new image path
-    '''
-    def change_competition(self):
-        if len(self.__competition_images) == 0: return
-
-        self.__logo_competition_index += 1
-
-        if self.__logo_competition_index >= len(self.__competition_images):
-            self.__logo_competition_index = 0
-        
-        self.on_competition_changed.emit(self.__competition_images[self.__logo_competition_index])
 
     '''
     Return the tab key for the configured team

@@ -37,7 +37,6 @@ class GeneratorViewBase(QtWidgets.QMainWindow, Ui_MainWindow):
         # GUI signals
         self.btnChange_Background.clicked.connect(self.viewmodel.change_background)
         self.btn_save_image_r.clicked.connect(self.__save_image)
-        self.btnChange_Competition.clicked.connect(self.viewmodel.change_competition)
         self.actionConfiguration.triggered.connect(self.open_configuration_dialog)
         self.actionUpdateImageLibrary.triggered.connect(lambda: EventChannel().instance().publish("update_images_libary"))
         self.actionQuit.triggered.connect(lambda: QApplication.quit())
@@ -51,14 +50,12 @@ class GeneratorViewBase(QtWidgets.QMainWindow, Ui_MainWindow):
         # Services
         EventChannel().instance().subscribe("backgrounds_loaded", self.viewmodel.change_background)
         EventChannel().instance().subscribe("logo_teams_loaded", self.__initialize_logo_teams)
-        EventChannel().instance().subscribe("logo_competitions_loaded", self.viewmodel.change_competition)
 
     '''
     Initialize the window with all available images
     '''
     def initialize_screen(self):
         self.viewmodel.change_background()
-        self.viewmodel.change_competition()
         self.viewmodel.change_logo_team_a(Direction.FORWARD)
         self.viewmodel.change_logo_team_b(Direction.FORWARD)
 

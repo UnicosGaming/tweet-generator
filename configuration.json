@@ -8,6 +8,11 @@
             "inputs": "tbAB",
             "panel": "tbResult"
         },
+        "rl": {
+            "view": "viewAB",
+            "inputs": "tbAB",
+            "panel": "tbResult"
+        },
         "lol": {
             "view": "viewAB",
             "inputs": "tbAB",
